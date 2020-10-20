@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import RandomPrompt from './components/RandomPrompt';
+import axios from 'axios';
 
-class App extends React.Component {
-  render() {
-    const { name } = this.props;
-    return (
-      <>
-        <h1>
-          Hello {name}
-        </h1>
-      </>
-    );
-  }
-}
+const App = () => {
+  const [promptData, setPromptData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`/prompts?id=${Math.floor(Math.random()*1751)}`)
+      .then(({ data }) => {
+        setPromptData(data[0]);
+      })
+      .catch(() => {
+        setErrorMessage('Experiencing Technical Difficulties...');
+      });
+  }, []);
+
+  return (
+    <>
+      {!!promptData ? <RandomPrompt data={promptData} /> : null}
+      {!!errorMessage ? <h5>{errorMessage}</h5> : null}
+    </>
+  );
+};
 
 export default App;
