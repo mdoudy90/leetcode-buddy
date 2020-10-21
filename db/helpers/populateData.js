@@ -12,9 +12,11 @@ const populateData = async () => {
       difficulty: prompt.difficulty.level,
       paid_only: prompt.paid_only,
       frequency: prompt.frequency,
+      acceptanceRate: Number((prompt.stat.total_acs / prompt.stat.total_submitted).toFixed(2)),
     };
   });
-  queries.addPrompts(filteredData)
+  // console.log(filteredData.slice(0,3))
+  queries.addPrompts(filteredData);
 };
 
 populateData();

@@ -14,6 +14,7 @@ const promptSchema = new Schema({
   difficulty: { type: Number},
   paid_only: { type: Boolean},
   frequency: { type: Number},
+  acceptanceRate: { type: Number}
 });
 
 module.exports = {
